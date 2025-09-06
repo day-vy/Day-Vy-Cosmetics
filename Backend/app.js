@@ -1,9 +1,15 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { errorHandler, notfound } from './Middleware/error.middleware.notfound.js';
+import {
+  errorHandler,
+  notfound,
+} from "./Middleware/error.middleware.js";
 import authRoute from "./routes/auth.routes.js";
 import productRoute from "./routes/product.route.js";
+import bannerRoute from "./routes/banner.route.js";
+import userRoute from "./routes/user.route.js";
+import orderRoute from "./routes/order.route.js";
 const app = express();
 
 //cors
@@ -18,10 +24,13 @@ app.use(cookieParser());
 // Routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/banners", bannerRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/orders", orderRoute);
 
 // Error middleware
 app.use(notfound);
 app.use(errorHandler);
 
-// 
+//
 export default app;
