@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Order Notification</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        min-width: 100%;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #222222;
+      }
+
+      a {
+        color:#fff;
+        text-decoration:none;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-top: 0;
+        text-align: center;
+      }
+
+      .email-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+      }
+
+      .email-header {
+        background-color: #1e1e1e;
+        padding: 30px;
+        color: #f086d9;
+        text-align: center;
+      }
+
+        .email-body {
+            padding: 14px;
+            background-color: #f4f3f3;
+            height: auto;
+        }
+
+        .email-footer {
+            background-color: #1e1e1e;
+            padding: 14px;
+            color: #d55fbb;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .product-list {
+            margin: 20%;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-img {
+            margin-right: 20px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-tittle {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <img src="https://day-vy-cosmetics.com/logo.png" alt="Day-Vy Cosmetics Logo" style="width:80px;height:80px;margin-bottom:18px;border-radius:50%;box-shadow:0 2px 8px rgba(214,51,132,0.10);">
+        </div>
+        <div class="email-body">
+    <h1>Your Order is Pending</h1>
+		<p>Dear <%= name %>,</p>
+		<p>Your order is currently being processed. We will notify you once it is shipped.</p>
+		<p>Thank you for your patience and for choosing Day-Vy Cosmetics.</p>
+
+        <div class="email-body">
+            <% products.forEach(product { %>
+                <div class="product-item">
+                    <img src="<%= product.image %>" alt="<%= product.title %>" class="product-img">
+                    <div class="product-details">
+                        <p class="product-tittle"><%= product.title %></p>
+                        <p class="product-price">Price: $<%= product.price %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <p>If you have any question or need assistance, feel free to <a href="mailto:support@day-vy-cosmetics.com" style="color:#d63384;font-weight:bold;font-family:Arial, sans-serif;">support@day-vy-cosmetics.com</a>.</p>
+        <p>Thank you for shopping with Day Vy Cosmetics</p>
+        </div>
+        <div class="email-footer">
+            <p>&copy; 2025 Day Vy Cosmetics. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
