@@ -17,12 +17,13 @@ let configuration = {
   },
 };
 
+
 const sendMail = async (messageoption) => {
   const transporter = await createTransporter(configuration);
   await transporter.verify();
-  await transporter.sendMail(messageoption, (err, info) => {
-    if (error) {
-      console.log(error);
+  transporter.sendMail(messageoption, (err, info) => {
+    if (err) {
+      console.log(err);
     } else {
       console.log(info.response);
     }
