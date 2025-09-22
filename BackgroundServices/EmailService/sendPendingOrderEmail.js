@@ -5,31 +5,32 @@ import Order from "../models/order.model.js"; // Fixed typo in model name
 dotenv.config();
 
 const sendPendingOrderEmail = async () => {
-const orders = await Order.find({ status: 0 });
+  const orders = await Order.find({ status: 0 });
   if (orders.length > 0) {
     for (let order of orders) {
       ejs.renderFile(
         "templates/pendingorder.ejs",
         {
-            name: order.name,
-            products: order.products
+          name: order.name,
+          products: order.products,
         },
         async (err, data) => {
-             let messageOptions = { // Fixed variable naming convention
-                        from: process.env.EMAIL, // Fixed 'form' to 'from'
-                        to: order.email, // Fixed typo in 'email'
-                        subject: "Your order has been placed",
-                        html: data,
-                    };
+          let messageOptions = {
+            // Fixed variable naming convention
+            from: process.env.EMAIL, // Fixed 'form' to 'from'
+            to: order.email, // Fixed typo in 'email'
+            subject: "Your order has been placed",
+            html: data,
+          };
 
-                    try {
-                        await sendMail(messageOptions);
-                        await Order.findByIdAndUpdate(order._id, { $set: { status: 1 } });
-                    } catch (error) {
-                      console.log(error); // Improved error logging
-                    }
+          try {
+            await sendMail(messageOptions);
+            await Order.findByIdAndUpdate(order._id, { $set: { status: 1 } });
+          } catch (error) {
+            console.log(error); // Improved error logging
+          }
         }
-      )
+      );
     }
   }
 };
