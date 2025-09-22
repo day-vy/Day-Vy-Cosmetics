@@ -23,6 +23,7 @@ const services = () => {
 const promotion = () => {
   cron.schedule("30 5 * * 5", async () => {
     // send promotion email
+    sendPromotionEmail();
   });
 };
 
